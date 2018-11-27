@@ -17,12 +17,11 @@ def callback(p):
 button.callback(trigger= Pin.IRQ_FALLING, handler=callback)
 
 pycom.heartbeat(False)
-print('stating test 1.1')
+print('stating test 1.2')
 print(os.uname())
-while True:
+#while True:
+for cycles in range(5): # stop after 5 cycles
     # send some data
-    print('toggle led')
-    led.toggle()
     print('diod: green')
     pycom.rgbled(0x007f00) # green
     time.sleep(2)
