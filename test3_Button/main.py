@@ -1,5 +1,3 @@
-from network import LoRa
-import socket
 import machine
 import time
 import pycom
@@ -7,13 +5,19 @@ import paddr
 from machine import Pin
 
 # initialize GP16 in gpio mode (alt=0) and make it an output
-led = Pin("G16",mode=Pin.OUT)
+led = Pin('G16',mode=Pin.OUT)
 
 # initialize GP17 in gpio mode and make it an input with the
 # pull-up enabled
+button = Pin('G17', mode=Pin.IN, pull=Pin.PULL_UP)
+def callback(p):
+    print('pin change', p)
+    led.toggle()
+
+button.callback(trigger= Pin.IRQ_FALLING, handler=callback)
 
 pycom.heartbeat(False)
-print('stating test')
+print('stating test 1.1')
 print(os.uname())
 while True:
     # send some data
