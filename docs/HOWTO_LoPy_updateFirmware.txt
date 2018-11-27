@@ -1,0 +1,22 @@
+Hello,
+
+The upgrade problems are caused by a bug in Espressif's IDF that is causing the flash memory of the module to be write protected. Espressif is working to provide a permanent solution for this as soon as possible. In the meantime they have given us a temporal way to solve it. The procedure is the following:
+
+Download this tool which needs to be executed as:
+
+python flash_debug.py /dev/ttyUSB0 write 0x0 2
+
+(/dev/ttyUSB0 will have to be replaced by the actual serial port on your system)
+
+Running the tool requires a serial connection to the module, Python 2 and Pyserial installed on your computer. The easiest way is via the expansion board. If an expansion board is not available then any USB-to-serial converter will work. The connection must be made on pins P0 (WiPy/LoPy RXD) and P1 (WiPy/LoPy TXD). Before running the tool, connect a cable jumper between GND and P2 (G23 on the expansion board), then reset the module and run the command. The total steps are:
+
+Connect the WiPy/LoPy via the serial port to your computer.
+Connect a cable jumper between GND and P2 (G23 on the expansion board).
+Reset the board.
+Run the command outlined above (python flash_debug.py /dev/ttyUSB0 write 0x0 2) and remember to pass the actual serial port on your system.
+Remove the cable jumper.
+Power cycle the WiPy/LoPy.
+Run the firmware update tool.
+We apologize for this issue but is completely out of our control. This is happening with all ESP32 based boards. I expect a solution from Espressif within a few days. Once that's done we will release a special firmware upgrade that will also install a new bootloader.
+
+For the firmware release next Tuesday we will integrate this unlock process in the firmware update to avoid any more manual steps.
