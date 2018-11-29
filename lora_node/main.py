@@ -24,7 +24,8 @@ button.callback(trigger= Pin.IRQ_FALLING, handler=callback)
 
 cfg = loranode.nodeconfig()
 print(loranode.version)
-print('LoRa enabled: ', cfg.lora_enabled)
+print('cfg:node_id: ', cfg.id)
+print('cfg:LoRa_enabled: ', cfg.lora_enabled)
 
 #while True:
 for cycles in range(3): # stop after 5 cycles
